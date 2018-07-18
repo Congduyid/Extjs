@@ -16,7 +16,6 @@
 
   <!-- Common Styles for the examples -->
   <link rel="stylesheet" type="text/css" href="./shared/examples.css" />
-
   <script>
 
     Ext.onReady(function () {
@@ -70,17 +69,20 @@
           { name: 'email' },
           { name: 'sdt', type: 'int' },
           { name: 'ghichu' },
-          { name: 'chucnang' },
+          { name: 'eee' },
         ]
       });
-
       // manually load local data
-      // store.loadData(myData);
+
+      store.loadData(myData);
       // store.add({
       //   name: "ten",
       //   diachi: "diachi",
-      // });
-
+      //   email: "email",
+      //   sdt: 1234,
+      //   ghichu: "ghitru",
+      //   eee: "eee",
+      // });   
       var sm = new Ext.grid.CheckboxSelectionModel()
       // create the Grid
       var grid = new Ext.grid.GridPanel({
@@ -88,7 +90,7 @@
         columns: [
           sm,
           {
-            id: 'company',
+            id: 'name',
             header: 'Name',
             width: 160,
             sortable: true,
@@ -123,16 +125,13 @@
             dataIndex: 'ghichu'
           },
           {
-            header: 'Chuc nang',
+            header: 'eee',
             width: 150,
-            dataIndex: 'chucnang'
-          },
-          {
-            header: 'check'
+            dataIndex: 'eee'
           }
         ],
         stripeRows: true,
-        autoExpandColumn: 'company',
+        autoExpandColumn: 'name',
         height: 500,
         width: '100%',
         title: 'Orders',
@@ -145,50 +144,58 @@
         stateId: 'grid',
         tbar: {
           items: [
-            {
 
+            {
               xtype: 'tbbutton',
               text: 'Them moi',
               icon: '/home/local/ELARION/duybc/Downloads/ext-3.4.0/resources/images/default/dd/drop-yes.gif',
               handler: function () {
                 var w = new Ext.Window({
+                  buttonAlign: 'right',
+                  title: 'Them moi',
                   layout: 'form',
                   items: [
-                    { xtype: 'textfield', fieldLabel: 'First Name' },
-                    new Ext.form.TextField({ fieldLabel: 'Surname' }),
-                    {
-                      xtype: 'button',
-                      text: 'Button',
-
-                    }
-                  ]
+                    { xtype: 'textfield', fieldLabel: 'Ten' },
+                    { xtype: 'textfield', fieldLabel: 'Dia chi' },
+                    { xtype: 'textfield', fieldLabel: 'Email' },
+                    { xtype: 'textfield', fieldLabel: 'Ghi Chu' },
+                    { xtype: 'textfield', fieldLabel: 'Sdt' },
+                    { xtype: 'textfield', fieldLabel: 'eee' },
+                    // new Ext.form.TextField({ fieldLabel: 'Surname' }),
+                  ],
+                  buttons: [{
+                    xtype: 'tbbutton',
+                    text: 'Luu'
+                  }],
                 });
                 w.show();
 
               }
             },
             {
-              text: 'Tat chuc nang',
+              text: 'Hide',
               icon: '/home/local/ELARION/duybc/Downloads/ext-3.4.0/resources/images/default/dd/drop-no.gif',
               handler: function () {
                 var colModel = grid.getColumnModel();
-
                 colModel.setHidden(5, true);
               }
             },
             '-',
             {
-              text: 'Hien chuc nang',
+              text: 'Show',
               icon: '/home/local/ELARION/duybc/Downloads/ext-3.4.0/resources/images/default/dd/drop-add.gif',
               handler: function () {
                 var colModel = grid.getColumnModel();
-
                 colModel.setHidden(5, false);
               }
             }
           ]
-        }
+        },
+
+        
       });
+
+
 
       // render cái tab1 ne
       grid.render('dulieutab1');
@@ -208,7 +215,7 @@
       }]
     });
 
-// Tạo cái toolbar ne
+    // Tạo cái toolbar ne
     Ext.onReady(function () {
       new Ext.Toolbar({
         renderTo: Ext.getBody(),
@@ -259,7 +266,6 @@
                 {
                   xtype: 'button',
                   text: 'Button',
-
                 }
               ]
             });
@@ -310,12 +316,13 @@
         var panel = new Ext.Panel({
           id: 'main-panel',
           baseCls: 'x-plain',
-          renderTo: Ext.getElementById('abcd'),
+          renderTo: Ext.get('dulieutab2'),
           layout: 'table',
           layoutConfig: { columns: 4 },
           defaults: { frame: true, width: 170, height: '100%' },
           items: [{
             title: 'Cong 2 so',
+            width: '100%',
             items: [{
               xtype: 'textfield',
               id: 'no1'
@@ -325,6 +332,7 @@
             }, {
               xtype: 'button',
               text: 'Cong',
+              width: '100%',
               listeners: {
                 click: function () {
                   Ext.Msg.alert('Ket qua:', parseInt(Ext.getCmp('no1').getValue()) + parseInt(Ext.getCmp('no2').getValue()));
@@ -333,6 +341,7 @@
             }, {
               xtype: 'button',
               text: 'Tru',
+              width: '100%',
               listeners: {
                 click: function () {
                   Ext.Msg.alert('Ket qua:', parseInt(Ext.getCmp('no1').getValue()) - parseInt(Ext.getCmp('no2').getValue()));
@@ -381,7 +390,7 @@
             }),
 
             buttons: [{
-              text: 'Submit',
+              text: 'disabled button',
               disabled: true
             }, {
               text: 'Close',
@@ -407,7 +416,7 @@
       <div id="dulieutab1" class="x-tab" title="Grid 1">
       </div>
       <!-- tab 2 -->
-      <div id="dulieutab2" class="x-tab" title="Grid 2">
+      <div id="dulieutab2" class="x-tab" title="Cong - tru">
       </div>
     </div>
   </div>
